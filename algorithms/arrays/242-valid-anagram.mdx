@@ -1,0 +1,65 @@
+# (Valid Anagram)[https://leetcode.com/problems/valid-anagram/description/] 
+
+Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+
+Example 1:
+
+Input: s = "anagram", t = "nagaram"
+Output: true
+
+Example 2:
+
+Input: s = "rat", t = "car"
+Output: false
+
+ 
+
+Constraints:
+
+- `1 <= s.length, t.length <= 5 * 104`
+- s and t consist of lowercase English letters.
+
+
+## Solution
+
+```js
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function(s, t) {
+
+    if (s.length !== t.length) return false
+
+    const tracker = {}
+    
+    for (let i=0;i<s.length;i++) {
+        const get_counter_s = tracker[s[i]]
+        const get_counter_t = tracker[t[i]]
+
+        // tracker not initialized
+        if (get_counter_s === undefined) {
+            tracker[s[i]] = 0
+            console.log(tracker)
+        }
+        if (get_counter_t === undefined) {
+            tracker[t[i]] = 0
+        }
+
+        // initialized already
+        tracker[s[i]] += 1
+        tracker[t[i]] -= 1
+    }
+    
+    
+    for (let [key,entry] of Object.entries(tracker)) {
+        if (entry !== 0 ) return false
+    }
+
+    return true
+};
+```

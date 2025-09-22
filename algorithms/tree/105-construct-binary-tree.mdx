@@ -1,0 +1,55 @@
+# 105 Construct Binary Tree from Preorder and Inorder Traversal
+
+Given two integers arrays `preorder` and `inorder` where `preorder` is the preoder traversal of a binary tree and `inorder` is the inorder traversal of the same tree, construct and return the binary tree.
+
+Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+Output: [3,9,null,null,15,7]
+
+```
+        3
+      /   \
+    9     20
+        /    \
+       15     7
+```
+
+## solution
+
+- First element of `preorder` is always the root of the tree.
+- In `inorder` array, the root divides the tree to left and right
+  - ex: root: 3, left: [9], right [15,20,7]
+- root of the binary tree is the 1st element of preorder [3,9,20,15,7], which is 3
+- index of 3 from inorder [9,3,15,20,7] is index `mid = 1`,
+  - left nodes are [9], right nodes are [15,20,7] from preorder [3,9,20,15,7]
+  - left nodes are [9], right nodes are [15,20,7] from inorder [9,3,15,20,7]
+
+```js
+class Node {
+  constructor(value=0, left=null, right=null) {
+    this.value = value
+    this.left = left
+    this.right = right
+  }
+}
+
+/*
+* preoder: int[]
+* inorder: int[]
+* return Node
+*/
+function buildTree(preorder, inorder) {
+  // base case
+  if (preorder.length === 0 || inorder.length === 0) return null
+
+  // initialze root
+  const root = new Node(preoder[0])
+
+  const mid = inorder.indexOf(preorder[0])
+
+  // pooulate recursively left and right
+  root.left = buildTree(preorder.slice(1,mid+1), inorder.slice(0,mid))
+  root.right = buildTree(preorder.slice(mid+1), inorder.slice(mid+1))
+
+  return root
+}
+```

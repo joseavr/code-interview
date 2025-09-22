@@ -1,0 +1,52 @@
+# (36. Valid Sudoku)[https://leetcode.com/problems/valid-sudoku/description/]
+
+Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+
+- Each row must contain the digits 1-9 without repetition.
+- Each column must contain the digits 1-9 without repetition.
+- Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+
+Note:
+
+- A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+- Only the filled cells need to be validated according to the mentioned rules.
+
+## solution
+
+Create three hassets: for rows, cols, and subgrids of 3x3, where key represents the index and value the Set.
+
+```js
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function(board) {
+    const row_hashset = {}
+    const col_hashset = {}
+    const subgrid3By3 = {}
+
+    for (let [row_idx, row] of board.entries()) {
+        for (let [col_idx, col] of row.entries()) {
+            // check set exists in map
+            if (!(row_idx in row_hashset)) row_hashset[row_idx] = new Set()
+            if (!(col_idx in col_hashset)) col_hashset[col_idx] = new Set()
+            if (!([Math.floor(row_idx/3),Math.floor(col_idx/3)] in subgrid3By3)) subgrid3By3[[Math.floor(row_idx/3),Math.floor(col_idx/3)]] = new Set()
+
+            // if current col is empty string -> continue
+            if (col === ".") continue
+
+            // if current col is in the set, return false
+            if (row_hashset[row_idx].has(col)) return false
+            if (col_hashset[col_idx].has(col)) return false
+            if (subgrid3By3[[Math.floor(row_idx/3),Math.floor(col_idx/3)]].has(col)) return false
+
+            // populating the sets
+            row_hashset[row_idx].add(col)
+            col_hashset[col_idx].add(col)
+            subgrid3By3[[Math.floor(row_idx/3),Math.floor(col_idx/3)]].add(col)
+        }
+    }
+
+    return true
+};
+```
