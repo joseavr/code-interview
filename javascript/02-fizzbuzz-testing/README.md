@@ -15,6 +15,6 @@ Jest is a testing library created by Facebook. Agnostic to any framework, can be
 
 To configure jest we will run the following command: `pnpm create jest`
 
-We will the technical interview using TDD (Test Driven Development) by writing the test first before coding the business logic.
+We will start the technical interview using TDD (Test Driven Development) by writing the test first before coding the business logic.
 
 We will an script in package.json to watch test changes: `jest --watchAll`

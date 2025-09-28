@@ -1,0 +1,28 @@
+{
+  "name": "04-react-pokemon",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.13.1",
+  "dependencies": {
+    "nes.css": "2.3.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.5",
+    "@types/react": "19.1.1",
+    "@types/react-dom": "19.1.1",
+    "@vitejs/plugin-react": "5.0.4",
+    "eslint": "8.57.1",
+    "typescript": "5.9.2",
+    "vite": "7.1.7"
+  }
+}
